@@ -1,10 +1,6 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// StrictMode removed — @hello-pangea/dnd breaks with React 19 StrictMode double-invoke
+createRoot(document.getElementById('root')).render(<App />);
