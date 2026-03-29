@@ -162,11 +162,11 @@ export default function Home() {
               <div className={`board-${bg} h-36 flex items-center justify-center relative`}>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
                 <div className="relative z-10 flex flex-col items-center gap-2 w-full px-6">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-lg w-full h-8" />
+                  <div className="bg-white/20 rounded-lg w-full h-8" />
                   <div className="flex gap-2 w-full">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg flex-1 h-16" />
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg flex-1 h-16" />
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg flex-1 h-16" />
+                    <div className="bg-white/20 rounded-lg flex-1 h-16" />
+                    <div className="bg-white/20 rounded-lg flex-1 h-16" />
+                    <div className="bg-white/20 rounded-lg flex-1 h-16" />
                   </div>
                 </div>
                 <span className={`absolute bottom-3 left-1/2 -translate-x-1/2 text-sm font-semibold ${isLight(bg) ? 'text-gray-800' : 'text-white'}`}>

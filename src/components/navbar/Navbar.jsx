@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LayoutDashboard, Plus, X } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import WorkspacesDropdown from './WorkspacesDropdown';
@@ -53,9 +53,6 @@ export default function Navbar({ onBoardCreated }) {
     <>
       <header className="h-12 bg-[#1D2125] border-b border-white/10 flex items-center px-3 gap-2 flex-shrink-0 z-30">
         <Link to="/" className="flex items-center gap-1.5 px-2 hover:opacity-90 transition-opacity">
-          <div className="w-6 h-6 bg-blue-500 rounded flex items-center justify-center">
-            <LayoutDashboard size={14} className="text-white" />
-          </div>
           <span className="text-white font-bold text-lg tracking-tight">Scaler Assignment</span>
         </Link>
 
@@ -97,11 +94,11 @@ export default function Navbar({ onBoardCreated }) {
               <div className={`board-${bg} h-36 flex items-center justify-center relative`}>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
                 <div className="relative z-10 flex flex-col items-center gap-2 w-full px-6">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-lg w-full h-8" />
+                  <div className="bg-white/20 rounded-lg w-full h-8" />
                   <div className="flex gap-2 w-full">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg flex-1 h-16" />
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg flex-1 h-16" />
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg flex-1 h-16" />
+                    <div className="bg-white/20 rounded-lg flex-1 h-16" />
+                    <div className="bg-white/20 rounded-lg flex-1 h-16" />
+                    <div className="bg-white/20 rounded-lg flex-1 h-16" />
                   </div>
                 </div>
                 <span className={`absolute bottom-3 left-1/2 -translate-x-1/2 text-sm font-semibold ${isLight(bg) ? 'text-gray-800' : 'text-white'}`}>
