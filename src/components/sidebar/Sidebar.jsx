@@ -37,7 +37,7 @@ export default function Sidebar({ boards = [] }) {
   const displayRecent = recentBoards.length > 0 ? recentBoards : boards;
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-[#1D2125] border-r border-white/10 overflow-y-auto">
+    <aside className="w-64 flex-shrink-0 border-r overflow-y-auto transition-colors" style={{ background: 'var(--bg-sidebar)', borderColor: 'var(--border)' }}>
 
       {/* Top nav */}
       <div className="p-2 space-y-0.5">

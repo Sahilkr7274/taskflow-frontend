@@ -71,7 +71,7 @@ export default function List({ list, index, onCardClick }) {
           {...provided.draggableProps}
           className={`flex-shrink-0 w-72 ${snapshot.isDragging ? 'opacity-90' : ''}`}
         >
-          <div className="bg-[#ebecf0] rounded-xl flex flex-col max-h-[calc(100vh-140px)]">
+          <div className="list-container rounded-xl flex flex-col max-h-[calc(100vh-140px)] transition-colors">
             {/* List Header */}
             <div className="flex items-center gap-2 px-3 pt-3 pb-1" {...provided.dragHandleProps}>
               {editingTitle ? (

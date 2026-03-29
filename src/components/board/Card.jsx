@@ -20,8 +20,8 @@ export default function Card({ card, index, onClick }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           onClick={() => onClick(card)}
-          className={`bg-white rounded-lg p-3 mb-2 cursor-pointer card-shadow hover:shadow-md transition-shadow group
-            ${snapshot.isDragging ? 'rotate-2 shadow-lg ring-2 ring-blue-400' : ''}`}
+          className={`card-item rounded-lg p-3 mb-2 cursor-pointer transition-all group
+            ${snapshot.isDragging ? 'rotate-2 shadow-lg ring-2 ring-blue-400 opacity-90' : ''}`}
         >
           {/* Labels */}
           {card.labels?.length > 0 && (

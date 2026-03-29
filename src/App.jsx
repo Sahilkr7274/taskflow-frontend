@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { BoardProvider } from './context/BoardContext';
 import { NavProvider } from './context/NavContext';
+import { ThemeProvider } from './context/ThemeContext';
 import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home';
 import HomeDashboard from './pages/HomeDashboard';
@@ -16,9 +17,10 @@ import Board from './pages/Board';
 export default function App() {
   return (
     <BrowserRouter>
-      <NavProvider>
-        <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
-        <Routes>
+      <ThemeProvider>
+        <NavProvider>
+          <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
+          <Routes>
           {/* All pages that share the Navbar + Sidebar shell */}
           <Route element={<AppLayout />}>
             <Route path="/"        element={<Home />} />
@@ -37,7 +39,8 @@ export default function App() {
             </BoardProvider>
           } />
         </Routes>
-      </NavProvider>
+        </NavProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

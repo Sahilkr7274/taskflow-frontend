@@ -20,11 +20,11 @@ export default function AppLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#1D2125]">
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-app)' }}>
       <Navbar onBoardCreated={handleBoardCreated} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar boards={boards} />
-        <main className="flex-1 overflow-y-auto bg-[#1D2125]">
+        <main className="flex-1 overflow-y-auto" style={{ background: 'var(--bg-main)' }}>
           <Outlet context={{ boards, setBoards }} />
         </main>
       </div>

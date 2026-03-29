@@ -10,6 +10,7 @@ import NavSearchBar from './NavSearchBar';
 import NotificationDropdown from './NotificationDropdown';
 import HelpDropdown from './HelpDropdown';
 import UserDropdown from './UserDropdown';
+import ThemeSwitcher from './ThemeSwitcher';
 import * as api from '../../api';
 import { useNav } from '../../context/NavContext';
 import toast from 'react-hot-toast';
@@ -51,7 +52,7 @@ export default function Navbar({ onBoardCreated }) {
 
   return (
     <>
-      <header className="h-12 bg-[#1D2125] border-b border-white/10 flex items-center px-3 gap-2 flex-shrink-0 z-30">
+      <header className="h-12 border-b flex items-center px-3 gap-2 flex-shrink-0 z-30 transition-colors" style={{ background: 'var(--bg-header)', borderColor: 'var(--border)' }}>
         <Link to="/" className="flex items-center gap-1.5 px-2 hover:opacity-90 transition-opacity">
           <span className="text-white font-bold text-lg tracking-tight">Scaler Assignment</span>
         </Link>
@@ -73,6 +74,7 @@ export default function Navbar({ onBoardCreated }) {
           <NavSearchBar />
           <NotificationDropdown />
           <HelpDropdown />
+          <ThemeSwitcher />
           <UserDropdown />
         </div>
       </header>

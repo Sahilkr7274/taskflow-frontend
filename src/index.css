@@ -2,16 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme CSS Variables ── */
+:root, [data-theme="dark"] {
+  --bg-app:        #1D2125;
+  --bg-header:     #1D2125;
+  --bg-sidebar:    #1D2125;
+  --bg-main:       #1D2125;
+  --bg-card:       #282E33;
+  --bg-input:      #22272B;
+  --bg-hover:      rgba(255,255,255,0.08);
+  --bg-hover2:     rgba(255,255,255,0.12);
+  --border:        rgba(255,255,255,0.10);
+  --text-primary:  #ffffff;
+  --text-secondary:#B6C2CF;
+  --text-muted:    #8C9BAB;
+  --text-input:    #ffffff;
+  --scrollbar:     rgba(255,255,255,0.15);
+  --list-bg:       #22272B;
+  --list-header:   #22272B;
+  --card-bg:       #2C333A;
+  --card-hover:    #323940;
+  --card-border:   rgba(255,255,255,0.08);
+  --input-border:  rgba(255,255,255,0.20);
+  --placeholder:   #8C9BAB;
+}
+
+[data-theme="light"] {
+  --bg-app:        #f1f2f4;
+  --bg-header:     #0052CC;
+  --bg-sidebar:    #ffffff;
+  --bg-main:       #f1f2f4;
+  --bg-card:       #ffffff;
+  --bg-input:      #ffffff;
+  --bg-hover:      rgba(0,0,0,0.06);
+  --bg-hover2:     rgba(0,0,0,0.10);
+  --border:        rgba(0,0,0,0.12);
+  --text-primary:  #172B4D;
+  --text-secondary:#44546F;
+  --text-muted:    #626F86;
+  --text-input:    #172B4D;
+  --scrollbar:     rgba(0,0,0,0.20);
+  --list-bg:       #F1F2F4;
+  --list-header:   #F1F2F4;
+  --card-bg:       #ffffff;
+  --card-hover:    #f8f9fa;
+  --card-border:   rgba(0,0,0,0.10);
+  --input-border:  rgba(0,0,0,0.20);
+  --placeholder:   #626F86;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme="system"] {
+    --bg-app:        #1D2125;
+    --bg-header:     #1D2125;
+    --bg-sidebar:    #1D2125;
+    --bg-main:       #1D2125;
+    --bg-card:       #282E33;
+    --bg-input:      #22272B;
+    --bg-hover:      rgba(255,255,255,0.08);
+    --bg-hover2:     rgba(255,255,255,0.12);
+    --border:        rgba(255,255,255,0.10);
+    --text-primary:  #ffffff;
+    --text-secondary:#B6C2CF;
+    --text-muted:    #8C9BAB;
+    --text-input:    #ffffff;
+    --scrollbar:     rgba(255,255,255,0.15);
+    --list-bg:       #22272B;
+    --list-header:   #22272B;
+    --card-bg:       #2C333A;
+    --card-hover:    #323940;
+    --card-border:   rgba(255,255,255,0.08);
+    --input-border:  rgba(255,255,255,0.20);
+    --placeholder:   #8C9BAB;
+  }
+}
+@media (prefers-color-scheme: light) {
+  [data-theme="system"] {
+    --bg-app:        #f1f2f4;
+    --bg-header:     #0052CC;
+    --bg-sidebar:    #ffffff;
+    --bg-main:       #f1f2f4;
+    --bg-card:       #ffffff;
+    --bg-input:      #ffffff;
+    --bg-hover:      rgba(0,0,0,0.06);
+    --bg-hover2:     rgba(0,0,0,0.10);
+    --border:        rgba(0,0,0,0.12);
+    --text-primary:  #172B4D;
+    --text-secondary:#44546F;
+    --text-muted:    #626F86;
+    --text-input:    #172B4D;
+    --scrollbar:     rgba(0,0,0,0.20);
+    --list-bg:       #F1F2F4;
+    --list-header:   #F1F2F4;
+    --card-bg:       #ffffff;
+    --card-hover:    #f8f9fa;
+    --card-border:   rgba(0,0,0,0.10);
+    --input-border:  rgba(0,0,0,0.20);
+    --placeholder:   #626F86;
+  }
+}
+
 @layer base {
   * { box-sizing: border-box; }
   body {
-    @apply text-gray-900 font-sans;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: background-color 0.2s, color 0.2s;
   }
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 9999px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar); filter: brightness(1.3); }
 }
 
 @layer components {
@@ -22,18 +124,37 @@
     @apply hover:bg-black/10 text-white px-3 py-1.5 rounded text-sm transition-colors;
   }
   .input-base {
-    @apply w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500;
+    @apply w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500;
+    background: var(--bg-input);
+    border-color: var(--input-border);
+    color: var(--text-input);
   }
+  .input-base::placeholder { color: var(--placeholder); }
   .card-shadow {
     box-shadow: 0 1px 3px rgba(9,30,66,0.25), 0 0 0 1px rgba(9,30,66,0.08);
   }
+  /* Theme-aware utility classes */
+  .theme-bg-app     { background-color: var(--bg-app); }
+  .theme-bg-header  { background-color: var(--bg-header); }
+  .theme-bg-sidebar { background-color: var(--bg-sidebar); }
+  .theme-bg-card    { background-color: var(--bg-card); }
+  .theme-bg-input   { background-color: var(--bg-input); }
+  .theme-bg-hover:hover { background-color: var(--bg-hover); }
+  .theme-border     { border-color: var(--border); }
+  .theme-text       { color: var(--text-primary); }
+  .theme-text-secondary { color: var(--text-secondary); }
+  .theme-text-muted { color: var(--text-muted); }
+  /* List & card theming for board page */
+  .list-container   { background-color: var(--list-bg); }
+  .card-item        { background-color: var(--card-bg); border: 1px solid var(--card-border); }
+  .card-item:hover  { background-color: var(--card-hover); }
 }
 
-.board-gradient-blue { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); }
+.board-gradient-blue   { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); }
 .board-gradient-purple { background: linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%); }
-.board-gradient-green { background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); }
+.board-gradient-green  { background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%); }
 .board-gradient-orange { background: linear-gradient(135deg, #E65100 0%, #BF360C 100%); }
-.board-gradient-teal { background: linear-gradient(135deg, #00695C 0%, #004D40 100%); }
-.board-gradient-red { background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%); }
-.board-gradient-black { background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); }
-.board-gradient-white { background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); }
+.board-gradient-teal   { background: linear-gradient(135deg, #00695C 0%, #004D40 100%); }
+.board-gradient-red    { background: linear-gradient(135deg, #C62828 0%, #B71C1C 100%); }
+.board-gradient-black  { background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); }
+.board-gradient-white  { background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); }
