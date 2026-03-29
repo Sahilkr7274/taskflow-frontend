@@ -22,6 +22,7 @@ export const getCard = (id) => api.get(`/cards/${id}`).then(r => r.data);
 export const createCard = (listId, data) => api.post(`/lists/${listId}/cards`, data).then(r => r.data);
 export const updateCard = (id, data) => api.put(`/cards/${id}`, data).then(r => r.data);
 export const deleteCard = (id) => api.delete(`/cards/${id}`).then(r => r.data);
+export const reorderCards = (listId, orderedIds) => api.put(`/lists/${listId}/cards/reorder`, { orderedIds }).then(r => r.data);
 export const moveCard = (id, data) => api.put(`/cards/${id}/move`, data).then(r => r.data);
 export const toggleLabel = (cardId, labelId) => api.post(`/cards/${cardId}/labels/${labelId}`).then(r => r.data);
 export const toggleMember = (cardId, userId) => api.post(`/cards/${cardId}/members/${userId}`).then(r => r.data);

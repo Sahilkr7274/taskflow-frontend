@@ -87,7 +87,15 @@ export const BoardProvider = ({ children }) => {
     }));
   };
 
-  // Optimistic drag-and-drop update
+  // Optimistic same-list card reorder
+  const reorderCardsOptimistic = (listId, newCards) => {
+    setBoard(b => ({
+      ...b,
+      lists: b.lists.map(l => l.id === listId ? { ...l, cards: newCards } : l),
+    }));
+  };
+
+  // Optimistic cross-list card move
   const moveCardOptimistic = (cardId, srcListId, dstListId, srcIndex, dstIndex) => {
     setBoard(b => {
       const lists = b.lists.map(l => ({ ...l, cards: [...l.cards] }));
@@ -108,7 +116,7 @@ export const BoardProvider = ({ children }) => {
       board, loading, loadBoard, setBoard,
       addList, editList, removeList,
       addCard, editCard, removeCard,
-      moveCardOptimistic, reorderListsOptimistic,
+      reorderCardsOptimistic, moveCardOptimistic, reorderListsOptimistic,
     }}>
       {children}
     </BoardContext.Provider>

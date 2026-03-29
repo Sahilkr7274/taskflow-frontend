@@ -4,6 +4,7 @@ import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Plus, X, ArrowLeft, LayoutDashboard } from 'lucide-react';
 import { useBoard } from '../context/BoardContext';
+import { useNav } from '../context/NavContext';
 import List from '../components/board/List';
 import CardModal from '../components/card/CardModal';
 import SearchFilter from '../components/board/SearchFilter';
@@ -12,7 +13,8 @@ import toast from 'react-hot-toast';
 
 export default function Board() {
   const { id } = useParams();
-  const { board, loading, loadBoard, setBoard, addList, moveCardOptimistic, reorderListsOptimistic, removeCard } = useBoard();
+  const { board, loading, loadBoard, setBoard, addList, reorderCardsOptimistic, moveCardOptimistic, reorderListsOptimistic, removeCard } = useBoard();
+  const { trackRecent } = useNav();
   const [selectedCard, setSelectedCard] = useState(null);
   const [addingList, setAddingList] = useState(false);
   const [listTitle, setListTitle] = useState('');
@@ -20,11 +22,16 @@ export default function Board() {
 
   useEffect(() => { loadBoard(id); }, [id]);
 
+  useEffect(() => {
+    if (board) trackRecent({ id: board.id, title: board.title, background: board.background });
+  }, [board?.id]);
+
   const onDragEnd = async (result) => {
     const { source, destination, type, draggableId } = result;
     if (!destination) return;
     if (source.droppableId === destination.droppableId && source.index === destination.index) return;
 
+    // ── List reorder ──────────────────────────────────────────────────────────
     if (type === 'LIST') {
       const newLists = Array.from(board.lists);
       const [moved] = newLists.splice(source.index, 1);
@@ -39,16 +46,33 @@ export default function Board() {
       return;
     }
 
-    // Card move
-    const cardId = draggableId;
-    const srcListId = source.droppableId;
+    // ── Card drag ─────────────────────────────────────────────────────────────
+    const cardId    = draggableId;          // Card.jsx sets draggableId={card.id}
+    const srcListId = source.droppableId;   // List.jsx sets droppableId={list.id}
     const dstListId = destination.droppableId;
-    moveCardOptimistic(cardId, srcListId, dstListId, source.index, destination.index);
-    try {
-      await api.moveCard(cardId, { listId: dstListId, position: destination.index });
-    } catch {
-      toast.error('Failed to move card');
-      loadBoard(id);
+
+    if (srcListId === dstListId) {
+      // Same-list reorder: splice array, bulk-update positions
+      const list     = board.lists.find(l => l.id === srcListId);
+      const newCards = Array.from(list.cards);
+      const [moved]  = newCards.splice(source.index, 1);
+      newCards.splice(destination.index, 0, moved);
+      reorderCardsOptimistic(srcListId, newCards);
+      try {
+        await api.reorderCards(srcListId, newCards.map(c => c.id));
+      } catch {
+        toast.error('Failed to reorder cards');
+        loadBoard(id);
+      }
+    } else {
+      // Cross-list move: remove from source, insert at destination
+      moveCardOptimistic(cardId, srcListId, dstListId, source.index, destination.index);
+      try {
+        await api.moveCard(cardId, { listId: dstListId, position: destination.index });
+      } catch {
+        toast.error('Failed to move card');
+        loadBoard(id);
+      }
     }
   };
 
