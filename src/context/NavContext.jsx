@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useCallback } from 'react';
 const NavContext = createContext(null);
 
 export const WORKSPACES = [
-  { id: 'ws-1', name: 'Taskflow Workspace', initial: 'T', color: 'from-blue-500 to-purple-600' },
+  { id: 'ws-1', name: 'Scaler Workspace', initial: 'S', color: 'from-blue-500 to-purple-600' },
   { id: 'ws-2', name: 'Personal Workspace', initial: 'P', color: 'from-green-500 to-teal-600' },
   { id: 'ws-3', name: 'Team Workspace',     initial: 'T', color: 'from-orange-500 to-red-600' },
 ];

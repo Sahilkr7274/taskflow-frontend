@@ -56,7 +56,7 @@ export default function Navbar({ onBoardCreated }) {
           <div className="w-6 h-6 bg-blue-500 rounded flex items-center justify-center">
             <LayoutDashboard size={14} className="text-white" />
           </div>
-          <span className="text-white font-bold text-lg tracking-tight">Taskflow</span>
+          <span className="text-white font-bold text-lg tracking-tight">Scaler Assignment</span>
         </Link>
 
         <div className="flex items-center gap-1 ml-2">
